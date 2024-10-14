@@ -1,12 +1,16 @@
-import speech_recognition
-r=speech_recognition.Recognizer()
-while True:
-    try:
-        with speech_recognition.Microphone() as source:
-            print('Please speak...')
-            r.adjust_for_ambient_noise(source,duration=1)
-            audio=r.listen(source)
-            text=r.recognize_google_cloud(audio)
-            print(text)
-    except:
-        print('Error. Please speak again')
+import speech_recognition as sr
+text=''
+r = sr.Recognizer()
+try:
+    with sr.Microphone() as source:
+        print('Please speak...')
+        r.adjust_for_ambient_noise(source, duration=1)
+        audio = r.listen(source)
+        text = r.recognize_google(audio)
+        print(text)
+except sr.UnknownValueError:
+    print('Google Speech Recognition could not understand audio')
+except sr.RequestError as e:
+    print(f'Could not request results from Google Speech Recognition service; {e}')
+except Exception as e:
+    print(f'Error: {e}. Please speak again')
