@@ -1,5 +1,5 @@
 import speech_recognition as sr
-text=''
+text1='print'#
 r = sr.Recognizer()
 try:
     with sr.Microphone() as source:
@@ -7,7 +7,10 @@ try:
         r.adjust_for_ambient_noise(source, duration=1)
         audio = r.listen(source)
         text = r.recognize_google(audio)
-        print(text)
+        if text==text1:
+            print('l') #
+        else:          #
+            print(text)#
 except sr.UnknownValueError:
     print('Google Speech Recognition could not understand audio')
 except sr.RequestError as e:
